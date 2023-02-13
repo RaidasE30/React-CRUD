@@ -8,4 +8,4 @@ export const linksData: LinkData[] = [
 
 export const linksGroups = [];
 
-export const expandBreakpoint: Breakpoint = 'md';
+export const expandBreakpoint: Breakpoint = 'sm';

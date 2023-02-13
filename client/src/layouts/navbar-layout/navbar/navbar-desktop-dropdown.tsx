@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import {
   Box,
   Typography,
@@ -18,14 +18,6 @@ type NavbarDesktopDropdownProps = {
   linksData: LinkData[]
 };
 
-const backdropStyles = {
-  class: {
-    display: 'none',
-  },
-};
-
-const isNode = (element: EventTarget | null): element is Node => element !== null && element instanceof Node;
-
 const NavbarDesktopDropdown: React.FC<NavbarDesktopDropdownProps> = ({
   title,
   linksData,
@@ -35,23 +27,6 @@ const NavbarDesktopDropdown: React.FC<NavbarDesktopDropdownProps> = ({
   const [open, setOpen] = React.useState(false);
 
   const Icon = open ? ArrowDropUpIcon : ArrowDropDownIcon;
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (containerRef.current) {
-      const { target } = event;
-      if (isNode(target) && !containerRef.current.contains(target)) {
-        // TODO ask if target can be asserted as Node?
-        setOpen(false);
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
 
   return (
     <Box
@@ -66,7 +41,6 @@ const NavbarDesktopDropdown: React.FC<NavbarDesktopDropdownProps> = ({
         <Icon />
       </Box>
       <Menu
-        slotProps={{ root: backdropStyles }}
         hideBackdrop
         open={isExpanded && open}
         onClose={() => setOpen(false)}
