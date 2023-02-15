@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import HouseModel from 'models/house-model';
 import ApiService from 'services/api-service';
+import { Container } from '@mui/material';
+import HouseCard from '../house-card';
+import { HouseCardGrid } from './styled';
 
 const HomePage = () => {
   const [houses, setHouses] = React.useState<HouseModel[]>([]);
@@ -14,11 +16,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box>
-      <Box component="pre">
-        {JSON.stringify(houses, null, 4)}
-      </Box>
-    </Box>
+    <Container>
+      <HouseCardGrid>
+        {houses.map((house) => <HouseCard key={house.id} {...house} />)}
+      </HouseCardGrid>
+    </Container>
   );
 };
 
