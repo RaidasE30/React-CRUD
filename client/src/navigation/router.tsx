@@ -4,6 +4,7 @@ import NavbarLayout from 'components/layouts/navbar-layout';
 import HomePage from 'pages/home-page';
 import HousePage from 'pages/house-page';
 import routes from './routes';
+import HouseFormPage from '../pages/house-form-page';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: routes.HousePage,
         element: <HousePage />,
+      },
+      {
+        path: routes.HouseCreatePage,
+        element: <HouseFormPage mode="create" />,
       },
     ],
   },
