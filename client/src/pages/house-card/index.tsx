@@ -4,14 +4,14 @@ import {
 } from '@mui/material';
 import Img from 'components/ui/img';
 import HouseModel from 'models/house-model';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
-import ApiService from 'services/api-service';
+import routes from 'navigation/routes';
 import * as Styled from './styled';
 
 type HouseCardProps = {
@@ -32,20 +32,27 @@ const HouseCard: React.FC<HouseCardProps> = ({
   },
   onDelete,
 }) => {
+  const navigate = useNavigate();
+
   const handleDelete = async (houseId: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      await ApiService.deleteHouse(houseId);
       onDelete(id);
     } catch (error) {
       alert(error);
     }
   };
 
+  const handleUpdate = (houseId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(routes.HouseUpdatePage.createLink(houseId));
+  };
+
   return (
     <Box sx={{ position: 'relative' }}>
-      <Link to={`/houses/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to={routes.HousePage.createLink(id)} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Swiper
           effect="slide"
           navigation
@@ -53,7 +60,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
           slidesPerView="auto"
           pagination
           loop
-          className="mySwiper"
+
         >
           {images.map((img) => (
             <SwiperSlide key={img}>
@@ -63,7 +70,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
         </Swiper>
         <Stack>
           <Styled.AdminActions>
-            <Styled.IcoBtn><EditRoundedIcon /></Styled.IcoBtn>
+            <Styled.IcoBtn onClick={(e) => handleUpdate(id, e)}><EditRoundedIcon /></Styled.IcoBtn>
             <Styled.IcoBtn onClick={(e) => handleDelete(id, e)}><ClearRoundedIcon /></Styled.IcoBtn>
           </Styled.AdminActions>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

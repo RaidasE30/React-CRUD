@@ -16,9 +16,11 @@ const HomePage = () => {
     })();
   }, []);
 
-  const onDelete = (houseId: string) => {
+  const onDelete = async (houseId: string) => {
     try {
-      setHouses(houses.filter((house) => house.id !== houseId));
+      await ApiService.deleteHouse(houseId);
+      const fetchedHouses = await ApiService.fetchHouses();
+      setHouses(fetchedHouses);
     } catch (error) {
       alert(error);
     }

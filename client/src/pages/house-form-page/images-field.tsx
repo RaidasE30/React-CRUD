@@ -6,10 +6,25 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import uniqid from 'uniqid';
 
-const initImagesId: string[] = [uniqid()];
+const initImagesIds: string[] = [uniqid()];
 
-const ImagesField = () => {
-  const [imagesIds, setImagesIds] = React.useState<string[]>(initImagesId);
+type ImagesFieldProps = {
+  defaultImages?: string[]
+};
+
+const ImagesField: React.FC<ImagesFieldProps> = ({
+  defaultImages,
+}) => {
+  const imgMap = React.useMemo(() => (defaultImages !== undefined
+    ? defaultImages.reduce<{ [key in string]: string }>((prevMap, defaultImg) => ({
+      ...prevMap,
+      [uniqid()]: defaultImg,
+    }), {})
+    : undefined), [defaultImages]);
+
+  const [imagesIds, setImagesIds] = React.useState<string[]>(imgMap !== undefined
+    ? Object.keys(imgMap)
+    : initImagesIds);
 
   const addImageField = () => setImagesIds([...imagesIds, uniqid()]);
   const removeImageField = (id: string) => setImagesIds(imagesIds.filter((imgId) => imgId !== id));
@@ -24,6 +39,7 @@ const ImagesField = () => {
             name="images"
             label="Image"
             fullWidth
+            defaultValue={imgMap && imgMap[id]}
             InputProps={imagesIds.length > 1 ? {
               endAdornment: (
                 <InputAdornment position="end">

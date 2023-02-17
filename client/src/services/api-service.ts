@@ -32,7 +32,13 @@ const createHouse = async (body: string) => {
 };
 
 const deleteHouse = async (id: string) => {
-  const { status } = await api.delete(`${ENDPOINT}/${id}`);
+  await api.delete(`${ENDPOINT}/${id}`);
+};
+
+const updateHouse = async (id: string, data: string) => {
+  const { status } = await api.patch<HouseModel>(`${ENDPOINT}/${id}`, data);
+
+  return status;
 };
 
 const ApiService = {
@@ -40,6 +46,7 @@ const ApiService = {
   fetchHouse,
   createHouse,
   deleteHouse,
+  updateHouse,
 };
 
 export default ApiService;

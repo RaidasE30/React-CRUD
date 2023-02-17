@@ -2,26 +2,16 @@ import {
   Box, Container, Theme, Typography, useMediaQuery,
 } from '@mui/material';
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import HouseModel from 'models/house-model';
-import ApiService from 'services/api-service';
+import { Navigate, useParams } from 'react-router-dom';
 import Img from 'components/ui/img';
+import useHouse from 'hooks/useHouse';
+import routes from 'navigation/routes';
 import { HouseImgGrid } from './styled';
 
 const HousePage = () => {
   const { id } = useParams();
+  const house = useHouse(id);
   const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
-
-  const [house, setHouse] = React.useState<HouseModel | undefined>(undefined);
-
-  React.useEffect(() => {
-    if (id !== undefined) {
-      (async () => {
-        const fetchedHouse = await ApiService.fetchHouse(id);
-        setHouse(fetchedHouse);
-      })();
-    }
-  }, [id]);
 
   const imageGridArea = (index: number) => {
     if (index === 0 && isSm) {
@@ -33,6 +23,8 @@ const HousePage = () => {
     }
     return 'auto';
   };
+
+  if (id === undefined) return <Navigate to={routes.HomePage} />;
 
   if (house !== undefined) {
     return (
@@ -64,8 +56,7 @@ const HousePage = () => {
         </Typography>
       </Container>
     );
-  }
-  return (<Box>Something went wrong! Go back</Box>);
+  } return <Box>Something went wrong. Go back!</Box>;
 };
 
 export default HousePage;
