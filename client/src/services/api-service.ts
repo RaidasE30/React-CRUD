@@ -41,12 +41,16 @@ const updateHouse = async (id: string, data: string) => {
   return status;
 };
 
+const loginUser = async (body: string) => api.post('/api/auth/login', body);
+
 const ApiService = {
   fetchHouses,
   fetchHouse,
   createHouse,
   deleteHouse,
   updateHouse,
+
+  loginUser,
 };
 
 export default ApiService;

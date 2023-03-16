@@ -11,6 +11,7 @@ const routes = {
     createLink: (id: string) => `${HouseUpdatePagePath}${id}`,
   },
   HouseCreatePage: '/housecreate',
+  LoginPage: '/login',
 } as const;
 
 export type Routes = typeof routes;

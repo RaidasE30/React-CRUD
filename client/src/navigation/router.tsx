@@ -5,6 +5,7 @@ import HomePage from 'pages/home-page';
 import HousePage from 'pages/house-page';
 import routes from './routes';
 import HouseFormPage from '../pages/house-form-page';
+import LoginPage from '../pages/auth-pages/login-page';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: routes.HouseUpdatePage.routePath,
         element: <HouseFormPage mode="update" />,
+      },
+      {
+        path: routes.LoginPage,
+        element: <LoginPage />,
       },
     ],
   },
