@@ -60,7 +60,7 @@ const HouseFormPage: React.FC<HouseFormPageProps> = ({
               defaultCity={house?.location.city}
             />
             <ImagesField defaultImages={house?.images} />
-            <TextField label="Price" fullWidth name="price" type="number" inputProps={{ step: '0.01' }} required defaultValue={house?.price.slice(0, -1)} />
+            <TextField label="Price" fullWidth name="price" type="number" inputProps={{ step: '0.01' }} required defaultValue={house?.price} />
             <Box>
               <Typography component="legend" defaultValue={house?.rating}>Rating</Typography>
               <Rating name="rating" defaultValue={house?.rating} />

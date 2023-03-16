@@ -1,8 +1,8 @@
 import axios from 'axios';
 import HouseModel from 'models/house-model';
 
-const BASEURL = 'http://localhost:5024';
-const ENDPOINT = '/houses';
+const BASEURL = 'http://localhost:5001';
+const ENDPOINT = '/api/houses';
 
 const api = axios.create({
   baseURL: BASEURL,

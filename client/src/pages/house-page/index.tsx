@@ -52,7 +52,7 @@ const HousePage = () => {
           </Box>
         </Box>
         <Typography component="h3" sx={{ fontWeight: 600, fontSize: '2rem', paddingLeft: 5 }}>
-          {`${house.price} night`}
+          {`${house.price} €`}
         </Typography>
       </Container>
     );

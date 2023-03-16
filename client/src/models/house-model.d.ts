@@ -6,8 +6,15 @@ type HouseModel = {
     city: string
   },
   images: strin[],
-  price: string,
+  price: number,
   rating: number,
+  owner: {
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    mobile: string,
+  }
 };
 
 export default HouseModel;

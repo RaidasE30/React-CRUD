@@ -38,7 +38,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
     e.preventDefault();
     e.stopPropagation();
     try {
-      onDelete(id);
+      onDelete(houseId);
     } catch (error) {
       alert(error);
     }
@@ -81,7 +81,7 @@ const HouseCard: React.FC<HouseCardProps> = ({
           </Box>
           <Typography component="h4" sx={{ color: 'grey.500', fontSize: '0.8rem' }}>{title}</Typography>
           <Typography component="h3" sx={{ fontWeight: 600, fontSize: '1rem', paddingTop: '0.8rem' }}>
-            {`${price} night`}
+            {`${price} €`}
           </Typography>
         </Stack>
       </Link>
