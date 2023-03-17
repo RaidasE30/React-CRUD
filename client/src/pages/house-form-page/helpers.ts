@@ -24,7 +24,7 @@ export const formatValues = (form: HTMLFormElement) => {
       city,
     },
     images: images as string[],
-    price: `${price}€`,
+    price: Number(price),
     rating: Number(rating),
   };
 };

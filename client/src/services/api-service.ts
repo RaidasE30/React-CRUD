@@ -1,8 +1,11 @@
 import axios from 'axios';
 import HouseModel from 'models/house-model';
 
-const BASEURL = 'http://localhost:5001';
-const ENDPOINT = '/api/houses';
+const BASEURL = 'http://localhost:5001/api';
+const ENDPOINT = '/houses';
+const METHOD = '/auth';
+
+const token = localStorage.getItem('token');
 
 const api = axios.create({
   baseURL: BASEURL,
@@ -10,8 +13,23 @@ const api = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
   },
 });
+
+// axios.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem('token');
+//
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//
+//     return config;
+//   },
+//
+//   (error) => Promise.reject(error),
+// );
 
 const fetchHouses = async () => {
   const { data } = await api.get<HouseModel[]>(ENDPOINT);
@@ -41,7 +59,9 @@ const updateHouse = async (id: string, data: string) => {
   return status;
 };
 
-const loginUser = async (body: string) => api.post('/api/auth/login', body);
+const loginUser = async (body: string) => api.post(`${METHOD}/login`, body);
+
+const registerUser = async (body: string) => api.post(`${METHOD}/register`, body);
 
 const ApiService = {
   fetchHouses,
@@ -51,6 +71,7 @@ const ApiService = {
   updateHouse,
 
   loginUser,
+  registerUser,
 };
 
 export default ApiService;

@@ -6,6 +6,7 @@ import HousePage from 'pages/house-page';
 import routes from './routes';
 import HouseFormPage from '../pages/house-form-page';
 import LoginPage from '../pages/auth-pages/login-page';
+import RegisterPage from '../pages/auth-pages/register-page';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: routes.LoginPage,
         element: <LoginPage />,
+      },
+      {
+        path: routes.RegisterPage,
+        element: <RegisterPage />,
       },
     ],
   },

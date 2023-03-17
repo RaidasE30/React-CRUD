@@ -12,6 +12,7 @@ const routes = {
   },
   HouseCreatePage: '/housecreate',
   LoginPage: '/login',
+  RegisterPage: '/register',
 } as const;
 
 export type Routes = typeof routes;
