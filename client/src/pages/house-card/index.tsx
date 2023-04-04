@@ -29,9 +29,12 @@ const HouseCard: React.FC<HouseCardProps> = ({
     rating,
     title,
     price,
+    owner,
   },
   onDelete,
 }) => {
+  const storedId = localStorage.getItem('userId') || '';
+  const isAdminLoggedIn = storedId && parseInt(storedId, 10) === 1;
   const navigate = useNavigate();
 
   const handleDelete = async (houseId: string, e: React.MouseEvent) => {
@@ -60,7 +63,6 @@ const HouseCard: React.FC<HouseCardProps> = ({
           slidesPerView="auto"
           pagination
           loop
-
         >
           {images.map((img) => (
             <SwiperSlide key={img}>
@@ -69,10 +71,20 @@ const HouseCard: React.FC<HouseCardProps> = ({
           ))}
         </Swiper>
         <Stack>
-          <Styled.AdminActions>
-            <Styled.IcoBtn onClick={(e) => handleUpdate(id, e)}><EditRoundedIcon /></Styled.IcoBtn>
-            <Styled.IcoBtn onClick={(e) => handleDelete(id, e)}><ClearRoundedIcon /></Styled.IcoBtn>
-          </Styled.AdminActions>
+          { isAdminLoggedIn || owner.id === parseInt(storedId, 10) ? (
+            <Styled.AdminActions>
+              <Styled.IcoBtn
+                onClick={(e) => handleUpdate(id, e)}
+              >
+                <EditRoundedIcon />
+              </Styled.IcoBtn>
+              <Styled.IcoBtn
+                onClick={(e) => handleDelete(id, e)}
+              >
+                <ClearRoundedIcon />
+              </Styled.IcoBtn>
+            </Styled.AdminActions>
+          ) : null}
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography component="h3" sx={{ fontWeight: 600, fontSize: '1rem' }}>
               {`${location.city}, ${location.country}`}

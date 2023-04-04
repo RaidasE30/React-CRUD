@@ -37,8 +37,10 @@ const LoginPage = () => {
       const res = await apiService.loginUser(payload);
       const { token } = res.data;
       const { name } = res.data.user;
+      const { id } = res.data.user;
       localStorage.setItem('token', token);
       localStorage.setItem('name', name);
+      localStorage.setItem('userId', id);
       navigate(routes.HomePage);
     } catch (err) {
       setError('User does not exist');
@@ -57,7 +59,7 @@ const LoginPage = () => {
           <Typography variant="h5" sx={{ textAlign: 'center' }}>Login</Typography>
           <Stack sx={{ gap: 2, mt: 2 }}>
             <TextField label="Email" required inputRef={emailRef} />
-            <TextField label="Password" required inputRef={passwordRef} />
+            <TextField label="Password" required inputRef={passwordRef} type="password" />
             <Button variant="outlined" size="large" onClick={loginUser}>LOGIN</Button>
           </Stack>
         </Styled.Paper>

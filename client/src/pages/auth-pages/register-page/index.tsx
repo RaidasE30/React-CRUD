@@ -49,8 +49,10 @@ const RegisterPage = () => {
       const res = await apiService.registerUser(payload);
       const { token } = res.data;
       const { name } = res.data.user;
+      const { id } = res.data.user;
       localStorage.setItem('token', token);
       localStorage.setItem('name', name);
+      localStorage.setItem('userId', id);
       navigate(routes.HomePage);
     } catch (err) {
       setError('User does not exist');
