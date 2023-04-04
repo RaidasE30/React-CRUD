@@ -16,7 +16,7 @@ This is a simple CRUD app, built with technologies listed below:
 * [Node.js](https://nodejs.org/en/) v16 or later
 
 To successfully launch this app is required to fill in environment variables. 
-See __.env.example__ file in root directory for required variables.
+See __.env.example__ file in __./server__ directory for required variables.
 
 To view app, you must run both server and client apps.
 Launch server app first
